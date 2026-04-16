@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="ShopBot – SauceDemo Suite"
+       verbose="1"
+       thread-count="2"
+       parallel="methods">
+
+    <listeners>
+        <listener class-name="com.shopbot.listeners.TestListener"/>
+    </listeners>
+
+    <!-- Module 1: Authentication -->
+    <test name="Auth Tests">
+        <classes>
+            <class name="com.shopbot.tests.AuthTest">
+                <methods>
+                    <include name="testLoginScenarios"/>
+                    <include name="testLogout"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Module 2: Product Listing and Sorting -->
+    <test name="Product Tests">
+        <classes>
+            <class name="com.shopbot.tests.ProductTest">
+                <methods>
+                    <include name="testProductsAreDisplayed"/>
+                    <include name="testSortByNameAtoZ"/>
+                    <include name="testSortByPriceLowToHigh"/>
+                    <include name="testProductDetailMatchesListing"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Module 3: Shopping Cart -->
+    <test name="Cart Tests">
+        <classes>
+            <class name="com.shopbot.tests.CartTest">
+                <methods>
+                    <include name="testAddOneProductCartBadge"/>
+                    <include name="testAddTwoProductsCartBadge"/>
+                    <include name="testRemoveProductFromCart"/>
+                    <include name="testCartRetainsItemsAfterNavigation"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Module 4: Checkout Flow -->
+    <test name="Checkout Tests">
+        <classes>
+            <class name="com.shopbot.tests.CheckoutTest">
+                <methods>
+                    <include name="testCheckoutStepOne"/>
+                    <include name="testOrderSummary"/>
+                    <include name="testCompleteOrder"/>
+                    <include name="testCheckoutEmptyFirstName"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Module 5: Problem User -->
+    <test name="Problem User Tests">
+        <classes>
+            <class name="com.shopbot.tests.ProblemUserTest">
+                <methods>
+                    <include name="testProblemUserCanLogin"/>
+                    <include name="testProblemUserBrokenImages"/>
+                    <include name="testProblemUserAddToCartBehavior"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

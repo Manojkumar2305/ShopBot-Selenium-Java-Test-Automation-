@@ -1,185 +1,81 @@
-# ShopBot-Selenium-Java-Test-Automation-
-Selenium-Java Test Automation Framework for SauceDemo using POM, TestNG, WebDriverManager, and Extent Reports. Covers authentication, product validation, cart, checkout, and problem user scenarios with scalable and maintainable design.
+# ShopBot – SauceDemo Automation Framework
 
-# 🛒 ShopBot – Selenium Java Automation Framework
+## AUT
+**URL:** https://www.saucedemo.com  
+**No backend setup needed** — use built-in test accounts
 
-ShopBot is a **Selenium-Java Test Automation Framework** built to automate a retail e-commerce application.
-It follows industry-standard practices like **Page Object Model (POM)**, **TestNG**, and **data-driven testing** to ensure scalability, maintainability, and reusability.
+## Built-in Users (all password: secret_sauce)
+| Username | Behavior |
+|---|---|
+| standard_user | Normal flow – all features work |
+| locked_out_user | Login blocked – error shown |
+| problem_user | Logs in but images broken, cart buggy |
 
-The framework automates end-to-end workflows including authentication, product validation, cart operations, checkout, and error scenarios.
+## Tech Stack
+| Tool | Version |
+|---|---|
+| Java | 11+ |
+| Selenium | 4.18.1 |
+| TestNG | 7.9.0 |
+| WebDriverManager | 5.7.0 |
+| ExtentReports | 5.1.1 |
+| Apache POI | 5.2.5 |
+| Jackson | 2.16.1 |
 
----
-
-## 🎯 Objective
-
-This project demonstrates:
-
-* Selenium WebDriver automation
-* Page Object Model design pattern
-* TestNG framework usage
-* Config-driven execution
-* Clean and scalable framework design
-
----
-
-## 🌐 Application Under Test
-
-* URL: https://www.saucedemo.com
-* Test Users:
-
-  * `standard_user` – normal flow
-  * `locked_out_user` – login blocked
-  * `problem_user` – UI issues
-
----
-
-## 🧩 Test Modules Covered
-
-### 🔐 1. Authentication
-
-* Login with valid and invalid users
-* Locked user validation
-* Logout functionality
-
-### 📦 2. Product Listing
-
-* Verify product display
-* Sorting (Name & Price)
-* Product detail validation
-
-### 🛒 3. Cart
-
-* Add/remove items
-* Cart badge verification
-* Persistence after navigation
-
-### 💳 4. Checkout
-
-* Fill customer details
-* Order summary validation
-* Complete order flow
-
-### ⚠️ 5. Problem User
-
-* Validate broken UI behavior
-* Detect incorrect images
-* Cart behavior issues
-
----
-
-## 🏗️ Framework Architecture
-
+## Project Structure
 ```
-src
-├── main/java
-│   ├── base            → DriverManager (WebDriver setup)
-│   ├── pages           → Page classes (UI actions)
-│   ├── config          → ConfigReader (reads properties)
-│   ├── utils           → Reusable utilities
-│   └── listeners       → Screenshot & reporting
-│
-├── test/java
-│   ├── base            → BaseTest (setup/teardown)
-│   └── tests           → Test classes
-│
-└── test/resources
-    └── config.properties
+ShopBot/
+├── pom.xml
+├── testng.xml
+├── screenshots/           ← auto-created on failure
+├── test-output/
+│   └── ShopBotReport.html ← auto-generated after run
+└── src/
+    ├── main/java/com/shopbot/
+    │   ├── config/ConfigReader.java
+    │   ├── pages/
+    │   │   ├── BasePage.java
+    │   │   ├── LoginPage.java
+    │   │   ├── ProductListPage.java
+    │   │   ├── ProductDetailPage.java
+    │   │   ├── CartPage.java
+    │   │   └── CheckoutPage.java
+    │   ├── utils/
+    │   │   ├── DriverManager.java
+    │   │   ├── ScreenshotUtil.java
+    │   │   ├── ExtentReportManager.java
+    │   │   └── RetryAnalyzer.java
+    │   └── listeners/TestListener.java
+    └── test/
+        ├── java/com/shopbot/
+        │   ├── dataproviders/TestDataProvider.java
+        │   └── tests/
+        │       ├── BaseTest.java
+        │       ├── AuthTest.java       ← Module 1
+        │       ├── ProductTest.java    ← Module 2
+        │       ├── CartTest.java       ← Module 3
+        │       ├── CheckoutTest.java   ← Module 4
+        │       └── ProblemUserTest.java← Module 5
+        └── resources/
+            ├── config.properties
+            ├── loginData.json
+            └── testdata.xlsx
 ```
 
----
+## Eclipse Setup
+1. File → Import → Maven → Existing Maven Projects → browse to ShopBot folder
+2. Right-click pom.xml → Maven → Update Project (Alt+F5)
+3. Run: `mvn test`  OR  right-click testng.xml → Run As → TestNG Suite
 
-## ⚙️ Key Features
-
-✅ Page Object Model (POM)
-✅ TestNG execution with testng.xml
-✅ Config-driven framework
-✅ Parallel execution support
-✅ Retry mechanism for failed tests
-✅ Screenshot capture on failure
-✅ Extent HTML reporting
-✅ No hardcoded values
-✅ No Thread.sleep() (uses explicit waits)
-
----
-
-## 🔧 Configuration
-
-All configurable values are stored in:
-
-```
-config.properties
-```
-
-Example:
-
-```
-browser=chrome
-base.url=https://www.saucedemo.com
-timeout=15
-headless=false
-```
-
-Accessed via:
-
-```
-ConfigReader.getInstance().getBaseUrl()
-```
-
----
-
-## ▶️ How to Run
-
-### Using Maven:
-
-```
-mvn clean test
-```
-
-### Using TestNG:
-
-* Right-click `testng.xml`
-* Run as TestNG Suite
-
----
-
-## 📊 Reporting
-
-* ExtentReports generates HTML reports
-* Screenshots captured on failure
-* Stored in:
-
-```
-/test-output/
-```
-
----
-
-## ⚠️ Rules Followed
-
-* ❌ No Thread.sleep()
-* ❌ No hardcoded URLs
-* ❌ No WebDriver in test classes
-* ✅ Clean POM architecture
-* ✅ Config-driven execution
-
----
-
-## 🚀 Good to Have (Implemented / Extendable)
-
-* DataProvider (JSON/Excel)
-* Parallel execution
-* Headless execution
-* FluentWait for dynamic elements
-* Retry logic using IRetryAnalyzer
-
----
-
-## 🧠 Learning Outcomes
-
-* Real-world automation framework design
-* Separation of concerns
-* Scalable test architecture
-* Debugging and maintainability
-
----
-
+## Key Design Points
+| Rule | Implementation |
+|---|---|
+| No Thread.sleep() | WebDriverWait + FluentWait only |
+| No hardcoded URLs/credentials | config.properties + testdata.xlsx |
+| No WebDriver in test methods | DriverManager + BaseTest handle lifecycle |
+| POM enforced | All locators/actions in Page classes |
+| Data-driven | Excel (LoginData, CheckoutData) + JSON |
+| Screenshot on failure | TestListener auto-captures |
+| Parallel execution | thread-count="2" in testng.xml |
+| Retry on failure | RetryAnalyzer (1 retry) |
+| Headless mode | Toggle in config.properties |

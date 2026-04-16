@@ -1,0 +1,26 @@
+[
+  {
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "expectedResult": "pass",
+    "description": "Standard user – valid login"
+  },
+  {
+    "username": "locked_out_user",
+    "password": "secret_sauce",
+    "expectedResult": "locked",
+    "description": "Locked out user – should see error"
+  },
+  {
+    "username": "",
+    "password": "",
+    "expectedResult": "fail",
+    "description": "Empty credentials – should see error"
+  },
+  {
+    "username": "invalid_user",
+    "password": "wrong_pass",
+    "expectedResult": "fail",
+    "description": "Invalid credentials – should see error"
+  }
+]
