@@ -183,17 +183,3 @@ mvn clean test
 
 ---
 
-## 📌 Future Enhancements
-
-* CI/CD integration (Jenkins/GitHub Actions)
-* Docker execution
-* Cross-browser testing grid
-* API + UI hybrid framework
-
----
-
-## 👨‍💻 Author
-
-Developed as part of automation framework practice to build industry-level testing skills.
-
----
